@@ -1,0 +1,48 @@
+// Frontend - HTML
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>File Upload</title>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
+      type="text/css"
+    />
+    <style>
+      .dropzone {
+        border: 2px dashed #0087f7;
+        border-radius: 5px;
+        padding: 20px;
+        min-height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="myDropzone" class="dropzone"></div>
+    <script>
+      Dropzone.options.myDropzone = {
+        url: "/upload",
+        paramName: "files", // The name that will be used to transfer the file
+        maxFilesize: 2, // MB
+        parallelUploads: 10,
+        maxFiles: 5,
+        //uploadMultiple: true,
+        acceptedFiles: ".jpeg,.jpg,.png,.pdf,.doc,.docx",
+        dictDefaultMessage: "Drop files here or click to upload",
+        dictRemoveFile: "Remove",
+        createImageThumbnails: true,
+
+        init: function () {
+          this.on("success", function (file, response) {
+            console.log("File uploaded successfully:", response);
+          });
+
+          this.on("error", function (file, errorMessage) {
+            console.error("Error uploading file:", errorMessage);
+          });
+        },
+      };
+    </script>
+  </body>
+</html>
